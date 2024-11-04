@@ -6,13 +6,13 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:04 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/01 17:52:51 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:37:28 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
 	int				i;
 	int				lenght;
@@ -22,28 +22,16 @@ char	*ft_strchr(const char *s, int c)
 	lenght = ft_strlen(s);
 	cc = (unsigned char)c;
 	if (cc == '\0')
-		return ((char *)&s[lenght]);
+		return (lenght);
 	while (s[i] && s[i] != cc)
 	{
 		i++;
 		if (i == lenght)
-			return (NULL);
+			return (-1);
 	}
 	if (s[i] == cc)
-		return ((char *)&s[i]);
-	return (NULL);
-}
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	int	*arr;
-
-	if (nmemb && size && ((nmemb * size) / size != nmemb))
-		return (NULL);
-	arr = malloc(nmemb * size);
-	if (!arr)
-		return (NULL);
-	ft_bzero(arr, nmemb * size);
-	return (arr);
+		return (i);
+	return (-1);
 }
 
 size_t	ft_strlen(const char *str)
@@ -54,15 +42,6 @@ size_t	ft_strlen(const char *str)
 	while (str[i] != '\0')
 		i++;
 	return (i);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-		((unsigned char *)s)[i++] = '\0';
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)

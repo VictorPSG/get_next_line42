@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:09 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/01 18:51:20 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:31:06 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@ char	*get_next_line(int fd)
 {
 	char 		*buffer;
 	static char *a;
+	int	i;
 
-	buffer = (char *)calloc(BUFFER_SIZE, sizeof(char) + 1);
-	while(!ft_strchr(buffer, '\n'))
+	i = 1;
+	buffer = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
+	read(fd, buffer, BUFFER_SIZE);
+	a = NULL;
+	while(ft_strchr(&buffer[i], '\n') && i < BUFFER_SIZE)
 	{
-		a = buffer;
-		read(fd, buffer, BUFFER_SIZE);
+		printf("%c", buffer[i]);
+		i++;
 	}
-	buffer = ft_strjoin(buffer, a);
 	return (buffer);
 }
-
 int	main(void)
 {
 	int	fd;
@@ -36,7 +38,7 @@ int	main(void)
 	for (int i = 0; i <2 ; i++)
 	{
 		file = get_next_line(fd);
-		printf("%s", file);
+		// printf("%s", file);
 	}
 }
 
