@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:09 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/05 17:24:05 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/05 20:25:53 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 char	*get_next_line(int fd, char *stash)
 {
-	char 		*buffer;
+	static char 		*buffer;
 	int	i;
 
 	i = 0;
 	buffer = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
 	read(fd, buffer, BUFFER_SIZE);
-	printf("buffer:%s\n", buffer);
+	// printf("buffer:%s\n", buffer);
 	while(ft_strchr(&buffer[i], '\n') && buffer[i])
 	{
 		i++;
@@ -44,6 +44,13 @@ char	*get_next_line(int fd, char *stash)
 	{
 		get_next_line(fd, stash);
 	}
+	else if (stash != NULL)
+	{
+		printf("buffer:%s\n", buffer);
+		buffer = ft_substr(buffer, i, BUFFER_SIZE);
+		// printf("valor i:%d\n", i);
+		// ft_strlcat(stash, buffer, ft_strlen(stash) + i + 1);
+	}
 	return (stash);
 }
 int	main(void)
@@ -52,7 +59,7 @@ int	main(void)
 	static char *stash;
 
 	fd = open("test.txt", O_RDONLY);
-	for (int i = 0; i < 5 ; i++)
+	for (int i = 0; i < 3 ; i++)
 	{
 		stash = get_next_line(fd, stash);
 		// printf("result :%s\n", stash);
