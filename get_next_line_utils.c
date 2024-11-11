@@ -6,32 +6,26 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:04 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/05 14:54:45 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/11 19:02:21 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int				i;
-	int				lenght;
-	unsigned char	cc;
+	int	i;
 
-	i = 0;
-	lenght = ft_strlen(s);
-	cc = (unsigned char)c;
-	if (cc == '\0')
-		return (lenght);
-	while (s[i] && s[i] != cc)
+	c = (unsigned char)c;
+	i = -1;
+	while (s[++i])
 	{
-		i++;
-		if (i == lenght)
-			return (-1);
+		if (s[i] == c)
+			return ((char *)&s[i]);
 	}
-	if (s[i] == cc)
-		return (i);
-	return (-1);
+	if (c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
 }
 
 size_t	ft_strlen(const char *str)
@@ -117,4 +111,21 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	arr[len] = '\0';
 	return (arr);
+}
+char	*ft_strdup(const char *str)
+{
+	char	*dup;
+	int		i;
+
+	dup = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
+	if (!dup)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		dup[i] = str[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }
