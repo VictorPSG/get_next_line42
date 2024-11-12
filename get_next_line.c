@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:09 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/11 20:20:03 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:38:36 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*get_suffix(char *stash)
 	char	*suffix;
 
 	i = 0;
-	while(stash[i] != '\n')
+	while(stash[i] != '\n' && stash[i])
 		i++;
 	i++;
 	suffix = ft_substr(stash, i, BUFFER_SIZE);
@@ -29,9 +29,11 @@ static char	*get_line(char *stash)
 	char	*get_line;
 
 	i = 0;
-	// printf("stash:%s\n", stash);
-	while(stash[i] != '\n')
+	while(stash[i] != '\n' && stash[i])
 		i++;
+	// printf("stash:%d\n", i);
+	if(stash[i] == '\0')
+		return (stash);
 	// printf("i: %d\n", i);
 	get_line = ft_substr(stash, 0, i);
 	return (get_line);
@@ -69,15 +71,12 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
 	if(!buffer)
 		return (NULL);
-
 	if(!stash)
 		stash = ft_strdup("");
 	stash = read_line(fd, buffer, stash);
 	free(buffer);
 	if(!stash)
 		return (NULL);
-	if(ft_strlen(stash) == 1)
-		return (stash);
 	line = get_line(stash);
 	stash = get_suffix(stash);
 	return (line);
@@ -88,10 +87,10 @@ char	*get_next_line(int fd)
 // 	char *stash;
 
 // 	fd = open("test.txt", O_RDONLY);
-// 	for (int i = 0; i < 10 ; i++)
+// 	for (int i = 0; i < 5 ; i++)
 // 	{
 // 		stash = get_next_line(fd);
-// 		printf("result :%s\n", stash);
+// 		printf("%s\n", stash);
 // 	}
 // }
 
