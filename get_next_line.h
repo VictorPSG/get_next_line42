@@ -6,14 +6,13 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:15 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/12 23:08:55 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:37:49 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 

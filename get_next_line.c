@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:09 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/13 20:13:14 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:36:57 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*get_suffix(char *stash)
 	i = 0;
 	while (stash[i] != '\n' && stash[i])
 		i++;
-	suffix = ft_substr(stash, i + 1, ft_strlen(stash));
+	suffix = ft_substr(stash, i + 1, ft_strlen(stash) - i);
 	free(stash);
 	return (suffix);
 }
