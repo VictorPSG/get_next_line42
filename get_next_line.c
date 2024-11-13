@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:09 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/12 17:38:36 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/12 22:06:26 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static char	*get_suffix(char *stash)
 	i = 0;
 	while(stash[i] != '\n' && stash[i])
 		i++;
-	i++;
-	suffix = ft_substr(stash, i, BUFFER_SIZE);
+	suffix = ft_substr(stash, i + 1, BUFFER_SIZE);
+	free(stash);
 	return (suffix);
 }
 static char	*get_line(char *stash)
@@ -33,9 +33,9 @@ static char	*get_line(char *stash)
 		i++;
 	// printf("stash:%d\n", i);
 	if(stash[i] == '\0')
-		return (stash);
+		return (ft_strdup(stash));
 	// printf("i: %d\n", i);
-	get_line = ft_substr(stash, 0, i);
+	get_line = ft_substr(stash, 0, i+1);
 	return (get_line);
 }
 static char	*read_line(int fd, char *buffer, char *stash)
@@ -49,6 +49,7 @@ static char	*read_line(int fd, char *buffer, char *stash)
 		if(read_bytes == 0 && stash[0] == '\0')
 		{
 			free(stash);
+			stash = NULL;
 			return (NULL);
 		}
 		if(read_bytes <= 0)
@@ -65,9 +66,15 @@ char	*get_next_line(int fd)
 	char *buffer;
 	char	*line;
 	static char	*stash;
-
 	if(fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		if(stash)
+		{
+			free(stash);
+			stash = NULL;
+		}
 		return (NULL);
+	}
 	buffer = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
 	if(!buffer)
 		return (NULL);
@@ -87,10 +94,10 @@ char	*get_next_line(int fd)
 // 	char *stash;
 
 // 	fd = open("test.txt", O_RDONLY);
-// 	for (int i = 0; i < 5 ; i++)
+// 	for (int i = 0; i < 30 ; i++)
 // 	{
 // 		stash = get_next_line(fd);
-// 		printf("%s\n", stash);
+// 		printf("line %d:%s", i, stash);
 // 	}
 // }
 

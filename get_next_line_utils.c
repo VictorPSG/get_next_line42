@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:04 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/12 17:34:18 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:58:13 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str && str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -66,25 +66,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	arr[len_s1] = '\0';
 	return (arr);
 }
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-	size_t	lenghtdst;
-	size_t	lenghtsrc;
-
-	i = 0;
-	lenghtdst = ft_strlen(dst);
-	lenghtsrc = ft_strlen(src);
-	if (size <= lenghtdst)
-		return (size + lenghtsrc);
-	while (lenghtdst + i < size - 1 && src[i])
-	{
-		dst[lenghtdst + i] = src[i];
-		i++;
-	}
-	dst[lenghtdst + i] = '\0';
-	return (lenghtdst + lenghtsrc);
-}
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*arr;
@@ -93,8 +74,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	max_len;
 
 	i = 0;
-	if (!s)
-		return (NULL);
 	str_len = ft_strlen(s);
 	if (start >= str_len)
 		return (NULL);
@@ -121,7 +100,7 @@ char	*ft_strdup(const char *str)
 	if (!dup)
 		return (0);
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		dup[i] = str[i];
 		i++;
