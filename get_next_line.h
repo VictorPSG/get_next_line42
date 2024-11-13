@@ -6,17 +6,17 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:15 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/12 21:24:33 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/12 22:20:26 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GNL_H
-# define GNL_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-// # define BUFFER_SIZE 10
 
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);

@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:04 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/12 21:58:13 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/12 22:14:46 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	arr[len_s1] = '\0';
 	return (arr);
 }
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*arr;
@@ -91,6 +92,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	arr[len] = '\0';
 	return (arr);
 }
+
 char	*ft_strdup(const char *str)
 {
 	char	*dup;
