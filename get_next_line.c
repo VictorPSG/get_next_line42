@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 11:05:09 by victda-s          #+#    #+#             */
-/*   Updated: 2024/11/13 20:36:57 by victda-s         ###   ########.fr       */
+/*   Updated: 2024/11/13 22:29:12 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static char	*get_suffix(char *stash)
 		i++;
 	suffix = ft_substr(stash, i + 1, ft_strlen(stash) - i);
 	free(stash);
+	stash = NULL;
 	return (suffix);
 }
 
@@ -47,7 +48,7 @@ static char	*read_line(int fd, char *buffer, char *stash)
 	while (!ft_strchr(stash, '\n'))
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes == 0 && stash[0] == '\0')
+		if ((read_bytes == 0 && stash[0] == '\0') || read_bytes < 0)
 		{
 			free(stash);
 			stash = NULL;
@@ -55,11 +56,6 @@ static char	*read_line(int fd, char *buffer, char *stash)
 		}
 		if (read_bytes == 0)
 			return (stash);
-		if (read_bytes < 0)
-		{
-			free(stash);
-			return (NULL);
-		}
 		buffer[read_bytes] = '\0';
 		temp = ft_strjoin(stash, buffer);
 		free(stash);
